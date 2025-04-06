@@ -1,0 +1,233 @@
+<!DOCTYPE html><html lang="en">
+  <div id="websiteName">Aura-university</div>
+<<style>
+  @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+  #websiteName {
+    font-family: 'Pacifico', cursive;
+    font-size: 40px;
+    color: white;
+    text-shadow: 
+      2px 2px 0px black, 
+      -2px -2px 0px black, 
+      2px -2px 0px black, 
+      -2px 2px 0px black; /* Creates a black outline around the text */
+    padding-top: 20px;
+    padding-bottom: 10px;
+  }
+</style>>
+  <meta charset="UTF-8">
+  <title>Vision Board Builder</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.0/fabric.min.js"></script>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+      transition: background-color 0.3s ease;
+    }h1 {
+  color: #cc2b5e;
+}
+
+#canvas-container {
+  margin: 20px auto;
+  border: 2px dashed #ff85a2;
+  background: #ffffff;
+  width: 800px;
+  height: 500px;
+  box-shadow: 0 10px 30px rgba(255, 100, 150, 0.1);
+}
+
+.controls, .customize, .account-features {
+  margin-top: 20px;
+}
+
+input, select, button {
+  margin: 8px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+input[type="file"] {
+  background-color: transparent;
+  color: #cc2b5e;
+  padding: 0;
+  border: none;
+}
+
+input[type="text"], input[type="email"], input[type="password"] {
+  border: 1px solid #ff85a2;
+  border-radius: 6px;
+  padding: 8px;
+}
+
+button {
+  background-color: #ff85a2;
+  color: white;
+}
+
+button:hover {
+  background-color: #cc2b5e;
+}
+
+.customize select {
+  padding: 8px;
+}
+
+.journal-link {
+  margin-top: 30px;
+}
+
+.journal-link a {
+  display: inline-block;
+  background-color: #cc2b5e;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.journal-link a:hover {
+  background-color: #ff85a2;
+}
+
+#profilePic {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto;
+}
+
+.share-section input[type="text"] {
+  width: 300px;
+}
+
+  </style>
+</head>
+<body>  <h1>My Dream Vision Board</h1>  <img id="profilePic" src="" alt="Your Profile" style="display:none">
+  <input type="file" id="uploadProfile" accept="image/*" onchange="setProfilePic()">  <div class="controls">
+    <input type="file" id="imageUploader">
+    <input type="text" id="textInput" placeholder="Type your affirmation...">
+    <button onclick="addText()">Add Text</button>
+    <button onclick="prepareDownload()">Download Board</button>
+  </div>  <div class="customize">
+    <label>Background:</label>
+    <input type="color" onchange="document.body.style.backgroundColor = this.value"><label>Font:</label>
+<select onchange="document.body.style.fontFamily = this.value">
+  <option value="'Poppins', sans-serif">Poppins</option>
+  <option value="'Courier New', monospace">Courier New</option>
+  <option value="'Arial', sans-serif">Arial</option>
+  <option value="'Georgia', serif">Georgia</option>
+</select>
+
+<label>Canvas Size:</label>
+<select onchange="resizeCanvas(this.value)">
+  <option value="desktop">Desktop</option>
+  <option value="mobile">Mobile</option>
+</select>
+
+  </div>  <div id="canvas-container">
+    <canvas id="visionCanvas" width="800" height="500"></canvas>
+  </div>  <div class="account-features">
+    <h3>Sign up to Save & Share Your Vision Board</h3>
+    <input type="email" id="email" placeholder="Enter your email">
+    <input type="password" id="password" placeholder="Create a password">
+    <button onclick="signUp()">Sign Up</button>
+  </div>  <div class="share-section">
+    <button onclick="shareBoard()">Share Vision Board</button>
+    <input type="text" id="shareLink" readonly placeholder="Your shareable link will appear here">
+    <button onclick="copyLink()">Copy Link</button>
+  </div>  <div class="journal-link">
+    <a href="journal.html">Go to Journal Page</a>
+  </div>  <script>
+    const canvas = new fabric.Canvas('visionCanvas');
+
+    document.getElementById('imageUploader').addEventListener('change', function (e) {
+      const reader = new FileReader();
+      reader.onload = function (f) {
+        const imgObj = new Image();
+        imgObj.src = f.target.result;
+        imgObj.onload = function () {
+          const image = new fabric.Image(imgObj);
+          image.set({ left: 100, top: 100, scaleX: 0.3, scaleY: 0.3 });
+          canvas.add(image);
+        };
+      };
+      reader.readAsDataURL(e.target.files[0]);
+    });
+
+    function addText() {
+      const textInput = document.getElementById('textInput').value;
+      if (textInput.trim() === '') return;
+      const text = new fabric.Text(textInput, {
+        left: 150,
+        top: 150,
+        fill: '#cc2b5e',
+        fontSize: 24
+      });
+      canvas.add(text);
+      document.getElementById('textInput').value = '';
+    }
+
+    function resizeCanvas(view) {
+      const canvasEl = document.getElementById('visionCanvas');
+      if (view === 'mobile') {
+        canvasEl.width = 375;
+        canvasEl.height = 667;
+        canvas.setWidth(375);
+        canvas.setHeight(667);
+      } else {
+        canvasEl.width = 800;
+        canvasEl.height = 500;
+        canvas.setWidth(800);
+        canvas.setHeight(500);
+      }
+    }
+
+    function prepareDownload() {
+      alert("Please sign up before downloading your board.");
+    }
+
+    function setProfilePic() {
+      const file = document.getElementById('uploadProfile').files[0];
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const img = document.getElementById('profilePic');
+        img.src = e.target.result;
+        img.style.display = 'block';
+      }
+      reader.readAsDataURL(file);
+    }
+
+    function shareBoard() {
+      const dummyLink = 'https://myvisionapp.com/board/view/123456';
+      document.getElementById('shareLink').value = dummyLink;
+    }
+
+    function copyLink() {
+      const input = document.getElementById('shareLink');
+      input.select();
+      document.execCommand('copy');
+      alert('Link copied to clipboard!');
+    }
+
+    function signUp() {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      if (email && password) {
+        alert(`Signed up with: ${email}`);
+        // Integrate Firebase Auth here
+      } else {
+        alert("Please enter both email and password.");
+      }
+    }
+  </script></body>
+</html>

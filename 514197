@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Journal</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #fff0f5;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      color: #cc2b5e;
+    }
+    #profilePic {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      margin: 0 auto 20px;
+    }
+    .entry-box, .entry-item {
+      width: 80%;
+      margin: 10px auto;
+      background-color: white;
+      padding: 20px;
+      border: 2px dashed #cc2b5e;
+      border-radius: 10px;
+    }
+    textarea {
+      width: 100%;
+      height: 150px;
+      padding: 15px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ff85a2;
+    }
+    button {
+      background-color: #ff85a2;
+      color: white;
+      padding: 10px 20px;
+      margin: 8px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background-color: #cc2b5e;
+    }
+    .entry-history {
+      margin-top: 30px;
+    }
+    .share-box, .prompt-box {
+      margin-top: 30px;
+    }
+    #shareLink {
+      margin-top: 10px;
+      padding: 10px;
+      width: 80%;
+      border-radius: 8px;
+    }
+    .cute-btn {
+      background-color: #cc2b5e;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 30px;
+      font-size: 16px;
+      font-weight: bold;
+      margin: 10px;
+    }
+    .cute-btn:hover {
+      background-color: #ff85a2;
+    }
+    select {
+      padding: 8px;
+      border-radius: 8px;
+      border: 1px solid #cc2b5e;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>My Journal</h1>
+  <img id="profilePic" src="" alt="Profile Picture" style="display:none">
+  <input type="file" id="uploadProfile" accept="image/*" onchange="setProfilePic()">
+
+  <div class="prompt-box">
+    <h3 id="promptDisplay">Click shuffle to get a writing prompt!</h3>
+    <button onclick="shufflePrompt()">Shuffle Prompt</button>
+    <button onclick="writeConfession()">Write a Confession</button>
+  </div>
+
+  <div class="entry-box">
+    <textarea id="journalEntry" placeholder="Write your journal entry here..."></textarea><br>
+    <button onclick="saveEntry()">Save Entry</button>
+  </div>
+
+  <div class="entry-history">
+    <h2>Your Past Entries</h2>
+    <div id="entriesContainer"></div>
+  </div>
+
+  <div class="share-box">
+    <button onclick="generateShareLink()">Share Today's Entry</button><br>
+    <input type="text" id="shareLink" readonly><br>
+    <button onclick="copyLink()">Copy Link</button>
+  </div>
+
+  <div style="margin-top:30px;">
+    <label for="bgColor">Change Background:</label>
+    <select id="bgColor" onchange="changeBackground(this.value)">
+      <option value="#fff0f5">Light Pink</option>
+      <option value="#f0fff0">Mint</option>
+      <option value="#f0f8ff">Ice Blue</option>
+      <option value="#fffbe0">Soft Yellow</option>
+      <option value="#ffffff">White</option>
+    </select>
+  </div>
+
+  <div id="shared-buttons" style="display:none;">
+    <button class="cute-btn" onclick="goWrite()">Write My Entry</button>
+    <button class="cute-btn" onclick="goVision()">Go to Vision Board</button>
+  </div>
+
+  <script>
+    const prompts = [
+      "What made you smile today?",
+      "Describe a dream you remember vividly.",
+      "What's something you’re grateful for?",
+      "Write about a place you’d love to visit.",
+      "Describe your perfect day.",
+      "What’s your biggest goal right now?",
+      "How do you define happiness?",
+      "Describe someone who inspires you.",
+      "What was a recent challenge and how did you handle it?",
+      "Write about a memory that makes you laugh.",
+      "If today was a movie, what would the title be?",
+      "What’s one lesson life keeps teaching you?",
+      "Describe your current mood as a weather report.",
+      "What does your ideal future look like?",
+      "What are you avoiding and why?",
+      "Write a letter to your past self.",
+      "Write a letter to your future self.",
+      "What are 3 things you love about yourself?",
+      "How have you grown in the past year?",
+      "Describe your favorite way to relax."
+    ];
+
+    function setProfilePic() {
+      const file = document.getElementById('uploadProfile').files[0];
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        document.getElementById("profilePic").src = e.target.result;
+        document.getElementById("profilePic").style.display = "block";
+        localStorage.setItem("profilePic", e.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function shufflePrompt() {
+      const random = prompts[Math.floor(Math.random() * prompts.length)];
+      document.getElementById("promptDisplay").innerText = random;
+      document.getElementById("journalEntry").value = random + "\n\n";
+    }
+
+    function writeConfession() {
+      const confessionPrompt = "Write a confession...";
+      document.getElementById("promptDisplay").innerText = confessionPrompt;
+      document.getElementById("journalEntry").value = confessionPrompt + "\n\n";
+    }
+
+    function saveEntry() {
+      const content = document.getElementById("journalEntry").value;
+      if (!content.trim()) return alert("Please write something!");
+      let entries = JSON.parse(localStorage.getItem("journalEntries") || "[]");
+      const today = new Date().toLocaleDateString();
+      entries.push({ date: today, content });
+      localStorage.setItem("journalEntries", JSON.stringify(entries));
+      document.getElementById("journalEntry").value = "";
+      loadEntries();
+    }
+
+    function loadEntries() {
+      const entries = JSON.parse(localStorage.getItem("journalEntries") || "[]");
+      const container = document.getElementById("entriesContainer");
+      container.innerHTML = "";
+      entries.reverse().forEach((entry, index) => {
+        container.innerHTML += `
+          <div class="entry-item">
+            <strong>${entry.date}</strong><br>
+            <textarea onchange="updateEntry(${index}, this.value)">${entry.content}</textarea>
+          </div>`;
+      });
+    }
+
+    function updateEntry(index, newValue) {
+      let entries = JSON.parse(localStorage.getItem("journalEntries") || "[]");
+      entries[entries.length - 1 - index].content = newValue;
+      localStorage.setItem("journalEntries", JSON.stringify(entries));
+    }
+
+    function generateShareLink() {
+      const entries = JSON.parse(localStorage.getItem("journalEntries") || "[]");
+      if (!entries.length) return alert("No entries to share.");
+      const today = entries[entries.length - 1];
+      const encoded = encodeURIComponent(today.content);
+      const link = `${location.origin}${location.pathname}?shared=${encoded}`;
+      document.getElementById("shareLink").value = link;
+    }
+
+    function copyLink() {
+      const input = document.getElementById("shareLink");
+      input.select();
+      document.execCommand("copy");
+      alert("Link copied!");
+    }
+
+    function checkSharedView() {
+      const params = new URLSearchParams(window.location.search);
+      if (params.has("shared")) {
+        const entry = decodeURIComponent(params.get("shared"));
+        document.body.innerHTML = `
+          <h1>Shared Journal Entry</h1>
+          <div class="entry-box"><p>${entry}</p></div>
+          <div id="shared-buttons">
+            <button class="cute-btn" onclick="goWrite()">Write My Entry</button>
+            <button class="cute-btn" onclick="goVision()">Go to Vision Board</button>
+          </div>
+        `;
+      }
+    }
+
+    function goWrite() {
+      window.location.href = "journal.html";
+    }
+
+    function goVision() {
+      window.location.href = "index.html";
+    }
+
+    function changeBackground(color) {
+      document.body.style.backgroundColor = color;
+      localStorage.setItem("bgColor", color);
+    }
+
+    // On load
+    window.onload = function() {
+      const savedPic = localStorage.getItem("profilePic");
+      const savedColor = localStorage.getItem("bgColor");
+      if (savedPic) {
+        document.getElementById("profilePic").src = savedPic;
+        document.getElementById("profilePic").style.display = "block";
+      }
+      if (savedColor) {
+        document.body.style.backgroundColor = savedColor;
+        document.getElementById("bgColor").value = savedColor;
+      }
+      loadEntries();
+      checkSharedView();
+    };
+  </script>
+</body>
+</html>
