@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Terms & Conditions</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #fff0f5;
+      color: #cc2b5e;
+      padding: 40px;
+      line-height: 1.6;
+    }
+    h1, h2 {
+      color: #cc2b5e;
+    }
+    .button {
+      background-color: #ff85a2;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 30px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 30px;
+    }
+    .button:hover {
+      background-color: #cc2b5e;
+    }
+  </style>
+</head>
+<body>
+  <h1>Terms & Conditions</h1>
+  <p><strong>Effective Date:</strong> [7th April]</p>
+
+  <h2>1. Usage</h2>
+  <p>By using this website, you agree to use it only for its intended interactive purposes. Any misuse, modification, or unauthorized reproduction is not allowed.</p>
+
+  <h2>2. Intellectual Property</h2>
+  <p>All designs, visuals, and interactive features are the intellectual property of the site creator. Do not copy, redistribute, or claim ownership.</p>
+
+  <h2>3. No Guarantees</h2>
+  <p>This website is provided "as-is" without warranties of any kind. We are not liable for any damages or interruptions resulting from its use.</p>
+
+  <h2>4. Contact</h2>
+  <p>For any inquiries, reach us at: <a href="mailto:youremail@example.com">akawu504@email.com</a></p>
+
+  <button class="button" onclick="window.location.href='index.html'">Back to Home</button>
+</body>
+</html>
