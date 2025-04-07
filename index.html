@@ -175,5 +175,68 @@
       alert('Link copied to clipboard!');
     }
   </script>
-</body>
+<style>
+  .menu-container {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1000;
+    font-family: 'Arial', sans-serif;
+  }
+
+  .menu-toggle {
+    background-color: #ffb6c1;
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: background-color 0.3s ease;
+  }
+
+  .menu-toggle:hover {
+    background-color: #ff94ae;
+  }
+
+  .menu-links {
+    display: none;
+    margin-top: 10px;
+    background-color: #ffe6eb;
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+
+  .menu-links a {
+    display: block;
+    text-decoration: none;
+    color: #d6336c;
+    margin: 8px 0;
+    font-weight: bold;
+    transition: color 0.2s ease;
+  }
+
+  .menu-links a:hover {
+    color: #a82a54;
+  }
+</style>
+
+<div class="menu-container">
+  <button class="menu-toggle" onclick="toggleMenu()">Menu</button>
+  <div class="menu-links" id="menuLinks">
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms & Conditions</a>
+    <a href="about.html">About Us</a>
+    <a href="contact.html">Contact Us</a>
+  </div>
+</div>
+
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById('menuLinks');
+    menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+  }
+</script></body>
 </html>
