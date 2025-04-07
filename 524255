@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #fff0f5;
+      color: #cc2b5e;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      color: #cc2b5e;
+      font-size: 36px;
+    }
+    p {
+      font-size: 18px;
+    }
+    .back-button {
+      background-color: #ff85a2;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 30px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    .back-button:hover {
+      background-color: #cc2b5e;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>About Us</h1>
+  <p>We provide an interactive platform where you can create, share, and connect through your vision boards and journal entries. Our mission is to help you bring your dreams to life in a fun and creative way!</p>
+
+  <!-- Back Button to Return to Main Page -->
+  <button class="back-button" onclick="window.location.href='index.html'">Back to Home</button>
+
+</body>
+</html>
