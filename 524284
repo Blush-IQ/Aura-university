@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shop My Favorites</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: #fff0f5;
+      color: #333;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #d63384;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      padding: 0 10px;
+    }
+
+    .item {
+      background: #ffe6f0;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      text-align: center;
+      padding-bottom: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .item:hover {
+      transform: scale(1.05);
+    }
+
+    .item img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-bottom: 3px dashed #ff69b4;
+    }
+
+    .item a {
+      display: block;
+      margin: 10px auto;
+      text-decoration: none;
+      background: #ff69b4;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 30px;
+      width: 80%;
+      font-weight: bold;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .item a:hover {
+      background: #e5539d;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Shop My Favorites</h1>
+
+  <div class="grid">
+    <div class="item">
+      <img src="https://i.postimg.cc/DyVsgWs5/0af7fa3f38e0e1ad121a35fb5249cfdd.jpg" alt="Strawberry Bag">
+      <a href="https://shrinkme.ink/Strawberrybag-" target="_blank">Strawberry Bag</a>
+    </div>
+
+    <div class="item">
+      <img src="https://i.postimg.cc/7PJ001Cf/dd2ac6dd95637da2ec4084e77b8ebeda.jpg" alt="Miffy Pill">
+      <a href="https://shrinkme.ink/Miffy%20pill" target="_blank">Miffy Pill</a>
+    </div>
+
+    <div class="item">
+      <img src="https://i.postimg.cc/nh2Dp0Ww/b7c06b3404824189438d745a13cea78e.jpg" alt="Miffy Lamp">
+      <a href="https://shrinkme.ink/Miffy%20lamp" target="_blank">Miffy Lamp</a>
+    </div>
+
+    <div class="item">
+      <img src="https://i.postimg.cc/d00T1GPQ/59d3c629a834ae375b295d26cf0ccd53.jpg" alt="Miffy Blanket">
+      <a href="https://shrinkme.ink/Miffybl" target="_blank">Miffy Blanket</a>
+    </div>
+
+    <div class="item">
+      <img src="https://i.postimg.cc/ncvmwHGx/0260d011f3f817a8f00b2d2141060cc2.jpg" alt="Cinnamoroll pajamas">
+      <a href="https://shrinkme.ink/Cinnamoroll%20g" target="_blank">Cinnamoroll Goodie</a>
+    </div>
+
+    <div class="item">
+      <img src="https://i.postimg.cc/4xs9DrW9/35a90ba079511a6e21ae773f64c7f5cb.jpg" alt="Coquette Pajamas">
+      <a href="https://shrinkme.ink/Coquettepj" target="_blank">Coquette Pajamas</a>
+    </div>
+
+    <div class="item">
+      <img src="https://i.postimg.cc/0NHKJrPY/60b7803b7ed6170209babada7cdc79ac.jpg" alt="Sanrio Pajamas">
+      <a href="https://shrinkme.ink/Sanriopj%20g" target="_blank">Sanrio Pajamas</a>
+    </div>
+
+    <div class="item">
+      <img src="https://i.postimg.cc/jjqy7GNb/e7891c787e0941b4e3156335c1e47066.jpg" alt="LED Writing Lamp">
+      <a href="https://shrinkme.ink/LedWritinglamp" target="_blank">LED Writing Lamp</a>
+    </div>
+
+    <div class="item">
+      <img src="https://i.postimg.cc/RFyt2hYS/b75222b5ef085ff952d7129591d66f42.jpg" alt="Hello Kitty Slippers">
+      <a href="#" target="_blank">Hello Kitty Plush Slippers</a>
+    </div>
+
+    <div class="item">
+      <img src="https://i.postimg.cc/RFNfPKXp/088270565a38745921e9713db6dc418d.jpg" alt="Rabbit phone stand">
+      <a href="https://shrinkme.ink/Aura-university" target="_blank">Aura University Journal</a>
+    </div>
+  </div>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Back to Homepage Button</title>
+  <style>
+    .back-button {
+      display: inline-block;
+      background-color: #ff69b4;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+    }
+
+    .back-button:hover {
+      background-color: #e754a2;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+
+  <div style="text-align: center; margin-top: 20px;">
+    <a href="index.html" class="back-button">Back to Homepage</a>
+  </div>
+
+</body>
+</html></body>
+</html>
