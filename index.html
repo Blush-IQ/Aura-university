@@ -115,13 +115,6 @@
   <div class="note">
     Remember to download your vision board — it’ll disappear when you leave this page!
   </div>
-
-  <div class="share-section">
-    <button onclick="shareBoard()">Share Vision Board</button>
-    <input type="text" id="shareLink" readonly placeholder="https://yourdomain.com/index.html">
-    <button onclick="copyLink()">Copy Link</button>
-  </div>
-
   <div class="journal-link">
     <a href="journal.html">Go to Journal Page</a>
   </div>
@@ -161,18 +154,6 @@
       link.download = 'vision-board.png';
       link.href = canvas.toDataURL();
       link.click();
-    }
-
-    function shareBoard() {
-      const homepage = window.location.origin; // current site root
-      document.getElementById('shareLink').value = homepage;
-    }
-
-    function copyLink() {
-      const input = document.getElementById('shareLink');
-      input.select();
-      document.execCommand('copy');
-      alert('Link copied to clipboard!');
     }
   </script>
 <style>
@@ -238,5 +219,8 @@
     const menu = document.getElementById('menuLinks');
     menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
   }
-</script></body>
+</script>
+<footer style="background-color: #ffe6f0; text-align: center; padding: 20px; font-family: 'Comic Sans MS', cursive, sans-serif; color: #cc3366; font-size: 14px; border-top: 2px dashed #ff99cc;">
+  Made with love by <strong>Blush-IQ</strong> — All rights reserved
+</footer></body>
 </html>
